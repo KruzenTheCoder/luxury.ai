@@ -1,36 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Luxury.AI - Next.js Landing Page
 
-## Getting Started
+A premium AI platform landing page built with Next.js, featuring smooth animations and a luxury aesthetic.
 
-First, run the development server:
+## Design Decisions
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Visual Language**: Went with a dark, sophisticated palette (midnight black + gold accents) to convey premium quality. The minimal color scheme keeps focus on the content while the gold highlights add that luxury touch.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Animations**: Mixed subtle particle fields with bold scroll-triggered reveals. The DNA helix loader sets expectations for something special, while the staggered text animations and floating shapes add depth without overwhelming. The "Experience" section uses scroll progress to create that cinematic reveal effect - it's a bit extra but that's the point.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Typography**: Playfair Display for headlines (classic luxury vibes) paired with Inter for body text (clean, modern, readable). The letter-spacing on key elements gives it that high-end editorial feel.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Interactions**: Custom cursor and magnetic buttons because luxury is in the details. The hover effects on cards and gallery items reward exploration. Everything responds to user input to feel alive and premium.
 
-## Learn More
+**Performance**: All animations use CSS transforms and opacity for smooth 60fps. The particle field is canvas-based but lightweight. Intersection Observer handles scroll animations efficiently.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Basically tried to capture that "expensive but effortless" feeling throughout. Like a high-end watch - complex underneath but simple on the surface.
