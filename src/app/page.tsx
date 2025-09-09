@@ -99,7 +99,7 @@ export default function Home() {
               <span>Becomes Art</span>
             </div>
           </h1>
-          <p className={styles.heroSubtitle}>NEXT-GENERATION AI PLATFORM</p>
+          <p className={styles.heroSubtitle}>NEXT-GENERATION DEVELOPER PLATFORM</p>
           <a href="#vision" className={styles.ctaButton}>
             <span>BEGIN YOUR JOURNEY</span>
           </a>
@@ -219,7 +219,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <div className={styles.footerContent}>
-          <p className={styles.footerText}>LUXURY.AI © 2024</p>
+          <p className={styles.footerText}>LUXURY.AI © 2025</p>
           <p style={{ fontSize: '0.9rem', opacity: 0.6, marginTop: '1rem' }}>
             Where Tomorrow Begins Today
           </p>
