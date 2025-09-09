@@ -1,0 +1,11 @@
+/* src/components/AnimatedSection.module.css */
+.animatedSection {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s var(--easing);
+}
+
+.animatedSection.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

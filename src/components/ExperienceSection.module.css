@@ -1,0 +1,47 @@
+/* src/components/ExperienceSection.module.css */
+.experienceSection {
+  height: 400vh;
+  position: relative;
+}
+
+.stickyContainer {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.experienceContent {
+  text-align: center;
+  position: relative;
+}
+
+.experienceTitle {
+  font-family: var(--font-playfair);
+  font-size: clamp(2rem, 6vw, 5rem);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease-out;
+}
+
+.experienceWords {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.wordContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.word {
+  display: inline-block;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 100;
+  transition: all 0.3s ease-out;
+}

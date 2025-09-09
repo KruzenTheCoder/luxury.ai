@@ -1,0 +1,88 @@
+/* src/components/Preloader.module.css */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--midnight);
+  display: grid;
+  place-items: center;
+  z-index: 10001;
+  overflow: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.preloader.complete {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.dnaLoader {
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+
+.dnaStrand {
+  position: absolute;
+  width: 2px;
+  height: 60px;
+  background: var(--gold);
+  left: 50%;
+  transform: translateX(-50%);
+  animation: dnaRotate 2s linear infinite;
+}
+
+.dnaStrand:nth-child(2) {
+  animation-delay: 0.5s;
+  opacity: 0.5;
+}
+
+@keyframes dnaRotate {
+  0% { transform: translateX(-50%) rotateY(0deg); }
+  100% { transform: translateX(-50%) rotateY(360deg); }
+}
+
+.loaderText {
+  font-family: var(--font-playfair);
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  margin-top: 3rem;
+  overflow: hidden;
+}
+
+.loaderText span {
+  display: inline-block;
+  transform: translateY(100%);
+  animation: revealLetter 0.5s var(--easing) forwards;
+  animation-delay: calc(var(--i) * 0.05s);
+}
+
+@keyframes revealLetter {
+  to { transform: translateY(0); }
+}
+
+/* Progress Bar */
+.progressBar {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 1px;
+  background: rgba(212, 165, 116, 0.1);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--gold);
+  animation: fillProgress 2.5s ease-out forwards;
+  box-shadow: 0 0 10px var(--gold);
+}
+
+@keyframes fillProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
