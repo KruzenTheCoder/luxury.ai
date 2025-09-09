@@ -1,6 +1,6 @@
 // src/components/Cursor.tsx
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './Cursor.module.css'
 
 export default function Cursor() {
@@ -9,6 +9,7 @@ export default function Cursor() {
   const currentY = useRef(0)
   const targetX = useRef(0)
   const targetY = useRef(0)
+  const [isOverInteractive, setIsOverInteractive] = useState(false)
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -35,22 +36,58 @@ export default function Cursor() {
     animateCursor()
 
     // Hover effects
-    const addHover = () => cursorRef.current?.classList.add(styles.hover)
-    const removeHover = () => cursorRef.current?.classList.remove(styles.hover)
+    const addHover = () => {
+      cursorRef.current?.classList.add(styles.hover)
+      setIsOverInteractive(true)
+    }
+    const removeHover = () => {
+      cursorRef.current?.classList.remove(styles.hover)
+      setIsOverInteractive(false)
+    }
     
-    const hoverElements = document.querySelectorAll('a, button')
-    hoverElements.forEach(el => {
-      el.addEventListener('mouseenter', addHover)
-      el.addEventListener('mouseleave', removeHover)
+    // Update selector to include form elements
+    const updateHoverElements = () => {
+      const hoverElements = document.querySelectorAll('a, button, input, textarea, label, .interactive')
+      hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', addHover)
+        el.addEventListener('mouseleave', removeHover)
+      })
+      
+      return () => {
+        hoverElements.forEach(el => {
+          el.removeEventListener('mouseenter', addHover)
+          el.removeEventListener('mouseleave', removeHover)
+        })
+      }
+    }
+    
+    // Initial setup
+    const cleanup = updateHoverElements()
+    
+    // Re-run when DOM changes (for modal)
+    const observer = new MutationObserver(() => {
+      cleanup()
+      updateHoverElements()
+    })
+    
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
     })
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove)
+      observer.disconnect()
+      cleanup()
     }
   }, [])
 
   return (
-    <div ref={cursorRef} className={styles.cursor}>
+    <div 
+      ref={cursorRef} 
+      className={`${styles.cursor} ${isOverInteractive ? styles.interactive : ''}`}
+      style={{ pointerEvents: 'none' }}
+    >
       <div className={styles.cursorDot}></div>
       <div className={styles.cursorRing}></div>
     </div>

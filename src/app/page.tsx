@@ -7,10 +7,12 @@ import ParticleField from '@/components/ParticleField'
 import ScrollProgress from '@/components/ScrollProgress'
 import ExperienceSection from '@/components/ExperienceSection'
 import AnimatedSection from '@/components/AnimatedSection'
+import Modal from '@/components/Modal'
 import styles from './page.module.css'
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -212,7 +214,12 @@ export default function Home() {
             Ready to <span className={styles.gradientText}>Transcend</span>?
           </h2>
           <div className={styles.magneticArea}>
-            <a href="#" className={styles.magneticButton}>ENTER THE FUTURE</a>
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className={styles.magneticButton}
+            >
+              ENTER THE FUTURE
+            </button>
           </div>
         </AnimatedSection>
       </section>
@@ -225,6 +232,8 @@ export default function Home() {
           </p>
         </div>
       </footer>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   )
 }

@@ -3,9 +3,10 @@
   position: fixed;
   width: 20px;
   height: 20px;
-  pointer-events: none;
-  z-index: 10000;
+  pointer-events: none !important; /* Ensure this is always none */
+  z-index: 10003; /* Higher than modal (10002) */
   mix-blend-mode: difference;
+  transition: opacity 0.3s ease;
 }
 
 .cursorDot {
@@ -40,5 +41,14 @@
 .cursor.hover .cursorRing {
   width: 40px;
   height: 40px;
+  border-color: var(--gold);
+}
+
+/* When over interactive elements in modal */
+.cursor.interactive {
+  mix-blend-mode: normal;
+}
+
+.cursor.interactive .cursorRing {
   border-color: var(--gold);
 }
