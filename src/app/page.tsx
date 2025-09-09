@@ -24,35 +24,44 @@ export default function Home() {
       setTimeout(() => ripple.remove(), 1000)
     }
 
+    document.addEventListener('click', handleClick)
+
     // Magnetic button effect
-    const magneticArea = document.querySelector(`.${styles.magneticArea}`)
-    const magneticButton = document.querySelector(`.${styles.magneticButton}`)
-    
-    if (magneticArea && magneticButton) {
-      const handleMouseMove = (e: MouseEvent) => {
-        const rect = magneticArea.getBoundingClientRect()
-        const x = e.clientX - rect.left - rect.width / 2
-        const y = e.clientY - rect.top - rect.height / 2
+    const setupMagneticEffect = () => {
+      const magneticArea = document.querySelector(`.${styles.magneticArea}`)
+      const magneticButton = document.querySelector(`.${styles.magneticButton}`)
+      
+      if (magneticArea && magneticButton) {
+        const handleMouseMove = (e: MouseEvent) => {
+          const rect = magneticArea.getBoundingClientRect()
+          const x = e.clientX - rect.left - rect.width / 2
+          const y = e.clientY - rect.top - rect.height / 2
+          
+          ;(magneticButton as HTMLElement).style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`
+        }
         
-        ;(magneticButton as HTMLElement).style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`
-      }
-      
-      const handleMouseLeave = () => {
-        ;(magneticButton as HTMLElement).style.transform = 'translate(0, 0)'
-      }
-      
-      magneticArea.addEventListener('mousemove', handleMouseMove as any)
-      magneticArea.addEventListener('mouseleave', handleMouseLeave)
-      
-      return () => {
-        magneticArea.removeEventListener('mousemove', handleMouseMove as any)
-        magneticArea.removeEventListener('mouseleave', handleMouseLeave)
+        const handleMouseLeave = () => {
+          ;(magneticButton as HTMLElement).style.transform = 'translate(0, 0)'
+        }
+        
+        magneticArea.addEventListener('mousemove', handleMouseMove as any)
+        magneticArea.addEventListener('mouseleave', handleMouseLeave)
+        
+        return () => {
+          magneticArea.removeEventListener('mousemove', handleMouseMove as any)
+          magneticArea.removeEventListener('mouseleave', handleMouseLeave)
+        }
       }
     }
 
-    document.addEventListener('click', handleClick)
-    return () => document.removeEventListener('click', handleClick)
-  }, [])
+    // Setup magnetic effect after a delay to ensure DOM is ready
+    const magneticTimer = setTimeout(setupMagneticEffect, 100)
+
+    return () => {
+      document.removeEventListener('click', handleClick)
+      clearTimeout(magneticTimer)
+    }
+  }, [mounted])
 
   if (!mounted) return null
 
@@ -90,7 +99,7 @@ export default function Home() {
               <span>Becomes Art</span>
             </div>
           </h1>
-          <p className={styles.heroSubtitle}>NEXT-GENERATION DEVELOPER PLATFORM</p>
+          <p className={styles.heroSubtitle}>NEXT-GENERATION AI PLATFORM</p>
           <a href="#vision" className={styles.ctaButton}>
             <span>BEGIN YOUR JOURNEY</span>
           </a>
@@ -210,7 +219,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <div className={styles.footerContent}>
-          <p className={styles.footerText}>LUXURY.AI © 2025</p>
+          <p className={styles.footerText}>LUXURY.AI © 2024</p>
           <p style={{ fontSize: '0.9rem', opacity: 0.6, marginTop: '1rem' }}>
             Where Tomorrow Begins Today
           </p>
